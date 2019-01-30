@@ -4,6 +4,7 @@ const path = require('path');
 const style = require('ansi-styles');
 const signale = require('signale');
 const moment = require('moment');
+const Loki = require('lokijs');
 const CQWebSocket = require('cq-websocket').CQWebSocket;
 
 const uo = style.underline.open;
@@ -114,7 +115,10 @@ const breakdown = (message, canBeCommand = true) => {
     return result;
 };
 
-const bot = new CQWebSocket({ host: process.env.CQP_HOST || 'localhost' });
+const bot = new CQWebSocket({
+    host: process.env.CQP_HOST || 'localhost',
+    port: process.env.CQP_PORT || '6700'
+});
 bot.connect();
 bot.on('socket.connect', ep => logger.success(`WebSocket 端点 ${uo}${ep}${uc} 连接成功`));
 bot.on('socket.error', (ep, err) => {
