@@ -3,7 +3,13 @@
   "version": "0.1.0",
   "description": "A qq bot class based on CoolQ HTTP API and cq-websocket.",
   "main": "index.js",
-  "repository": "https://github.com/kurax/cq-ws-bot.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kurax/cq-ws-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kurax/cq-ws-bot/issues"
+  },
   "author": "Kurax <kurax@vip.qq.com>",
   "license": "MIT",
   "dependencies": {
