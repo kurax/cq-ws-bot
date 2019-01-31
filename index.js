@@ -4,8 +4,9 @@ const path = require('path');
 const style = require('ansi-styles');
 const signale = require('signale');
 const moment = require('moment');
-const Loki = require('lokijs');
 const CQWebSocket = require('cq-websocket').CQWebSocket;
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
 
 const uo = style.underline.open;
 const uc = style.underline.close;
@@ -178,27 +179,15 @@ module.exports = class Bot {
         this.logger = signale.scope(name);
         const dataPath = path.resolve(process.env.CQ_DATA || './data');
         require('fs-extra').ensureDirSync(dataPath);
-        this.db = new Loki(path.join(dataPath, `${name}.json`), {
-            autosave: true,
-            serializationMethod: 'pretty'
-        });
-        bot.once('ready', () => this.db.loadDatabase({}, () => {
+        this.db = low(new FileSync(path.join(dataPath, `${name}.json`)));
+        bot.once('ready', () => {
             [messageEvents, noticeEvents, requestEvents].forEach(events => Object.keys(events).forEach(event => {
                 const handler = this[events[event]];
                 if (typeof handler === 'function')
                     registerHandler(this, event, handler);
             }));
             this.logger.info('初始化完成');
-        }));
-    }
-
-    getCollection(name, options) {
-        let result = this.db.getCollection(name);
-        if (result === null) {
-            result = this.db.addCollection(name, options);
-            this.db.saveDatabase();
-        }
-        return result;
+        });
     }
 
     // noinspection JSMethodCanBeStatic
