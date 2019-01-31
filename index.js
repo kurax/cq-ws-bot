@@ -116,8 +116,8 @@ const breakdown = (message, canBeCommand = true) => {
 };
 
 const bot = new CQWebSocket({
-    host: process.env.CQP_HOST || 'localhost',
-    port: process.env.CQP_PORT || '6700'
+    host: process.env.CQ_HOST || 'localhost',
+    port: process.env.CQ_PORT || '6700'
 });
 bot.connect();
 bot.on('socket.connect', ep => logger.success(`WebSocket 端点 ${uo}${ep}${uc} 连接成功`));
@@ -176,7 +176,9 @@ module.exports = class Bot {
     constructor(name) {
         this.name = name;
         this.logger = signale.scope(name);
-        this.db = new Loki(path.join(__dirname, 'data', `${name}.json`), {
+        const dataPath = path.resolve(process.env.CQ_DATA || './data');
+        require('fs-extra').ensureDirSync(dataPath);
+        this.db = new Loki(path.join(dataPath, `${name}.json`), {
             autosave: true,
             serializationMethod: 'pretty'
         });
