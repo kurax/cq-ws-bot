@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "declaration": true,
+        "outDir": "lib",
+        "noFallthroughCasesInSwitch": true,
+        "strictPropertyInitialization": true,
+        "strictNullChecks": true
+    },
+    "include": ["src"]
+}
