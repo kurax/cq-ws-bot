@@ -14,7 +14,7 @@
         "url": "https://github.com/kurax/cq-ws-bot/issues"
     },
     "scripts": {
-        "start": "ts-node src/index.ts",
+        "start": "ts-node src/test.ts",
         "prepublishOnly": "tsc"
     },
     "author": "Kurax <kurax@vip.qq.com>",
@@ -25,11 +25,11 @@
         "dotenv": "^8.1.0",
         "fs-extra": "^8.1.0",
         "lowdb": "^1.0.0",
-        "moment": "^2.24.0",
         "signale": "^1.4.0"
     },
     "devDependencies": {
         "@types/ansi-styles": "^3.2.1",
+        "@types/fs-extra": "^8.0.0",
         "@types/lowdb": "^1.0.9",
         "@types/node": "^12.7.4",
         "@types/signale": "^1.2.1",
