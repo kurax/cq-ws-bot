@@ -15,7 +15,7 @@
     },
     "scripts": {
         "start": "ts-node src/test.ts",
-        "prepublishOnly": "tsc"
+        "prepublishOnly": "rimraf ./lib && tsc"
     },
     "author": "Kurax <kurax@vip.qq.com>",
     "license": "MIT",
@@ -33,6 +33,7 @@
         "@types/lowdb": "^1.0.9",
         "@types/node": "^12.7.4",
         "@types/signale": "^1.2.1",
+        "rimraf": "^3.0.0",
         "ts-node": "^8.3.0",
         "typescript": "^3.6.2"
     }
