@@ -148,7 +148,10 @@ export default class Bot {
         const listener: MessageListener = (e, context) => {
             const message: Message = {
                 id: context.message_id,
-                time: new Date(context.time),
+                time:
+                    typeof context.time === 'number'
+                        ? new Date(context.time * 1000)
+                        : new Date(),
                 from: context.user_id,
                 sender: context.sender,
                 message: context.message,
@@ -171,7 +174,10 @@ export default class Bot {
     private createEventListener(handler: Handler) {
         const listener: Listener = context => {
             const message: NoticeMessage = {
-                time: new Date(context.time),
+                time:
+                    typeof context.time === 'number'
+                        ? new Date(context.time * 1000)
+                        : new Date(),
                 user: context.user_id,
                 group: context.group_id
             };
